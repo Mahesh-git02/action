@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pradeep ❤️ Valentine</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+height:100vh;
+background:radial-gradient(circle at bottom,#3b0a57,#120018,#000);
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+}
+
+/* ENHANCED REALISTIC STARS */
+.stars{position:fixed;width:100%;height:100%;top:0;left:0;z-index:0;}
+.star{
+  position:absolute;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px rgba(255,255,255,0.8);
+  animation:realisticTwinkle ease-in-out infinite;
+}
+
+/* Different star variations for realism */
+.star.bright{
+  background:rgba(255,255,255,1);
+  box-shadow:0 0 20px rgba(255,255,255,1), 0 0 40px rgba(255,255,255,0.5);
+}
+
+.star.dim{
+  background:rgba(255,255,255,0.4);
+  box-shadow:0 0 5px rgba(255,255,255,0.3);
+}
+
+.star.blue{
+  background:rgba(173,216,230,0.9);
+  box-shadow:0 0 15px rgba(173,216,230,0.6);
+}
+
+.star.yellow{
+  background:rgba(255,255,200,0.9);
+  box-shadow:0 0 15px rgba(255,255,200,0.6);
+}
+
+@keyframes realisticTwinkle{
+  0%{opacity:0.3;transform:scale(0.8);}
+  25%{opacity:0.8;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.2);}
+  75%{opacity:0.6;transform:scale(1);}
+  100%{opacity:0.3;transform:scale(0.8);}
+}
+
+/* Shooting stars */
+.shooting-star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px 2px white;
+  animation:shoot 3s linear;
+}
+
+@keyframes shoot{
+  0%{
+    transform:translateX(0) translateY(0);
+    opacity:1;
+  }
+  100%{
+    transform:translateX(300px) translateY(300px);
+    opacity:0;
+  }
+}
+
+.shooting-star::after{
+  content:'';
+  position:absolute;
+  width:100px;
+  height:2px;
+  background:linear-gradient(90deg, white, transparent);
+  top:1px;
+  left:-100px;
+}
+
+/* HEARTS */
+.hearts{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:1;}
+.heart{position:absolute;font-size:22px;opacity:0.7;animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}}
+
+/* FIREWORKS */
+.fireworks{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:1;}
+.firework{position:absolute;width:5px;height:5px;background:yellow;border-radius:50%;animation:explode 1s ease-out forwards;}
+@keyframes explode{0%{transform:scale(1);opacity:1;}100%{transform:scale(10);opacity:0;}}
+
+/* CONTENT */
+.container{text-align:center;z-index:2;}
+h1{font-size:3rem;animation:pulse 2s infinite;text-shadow:0 0 20px rgba(255,46,99,0.5);}
+
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+
+.card{
+margin-top:20px;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);
+padding:30px;border-radius:25px;animation:fadeIn 1s ease-in;
+box-shadow:0 8px 32px rgba(255,46,99,0.2);
+border:1px solid rgba(255,255,255,0.2);
+}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.message{font-size:1.3rem;line-height:1.8;}
+.highlight{font-size:2.2rem;color:#ff2e63;text-shadow:0 0 15px rgba(255,46,99,0.6);}
+
+.buttons{margin-top:25px;position:relative;}
+button{
+padding:14px 35px;font-size:1.2rem;border:none;border-radius:40px;
+cursor:pointer;margin:10px;transition:0.3s;
+box-shadow:0 4px 15px rgba(0,0,0,0.3);
+}
+#yesBtn{background:#ff2e63;color:white;}
+#yesBtn:hover{background:#e0245a;transform:scale(1.1);box-shadow:0 6px 20px rgba(255,46,99,0.4);}
+#noBtn{background:white;color:#6a0dad;}
+#noBtn:hover{background:#f0f0f0;}
+
+/* ADDITIONAL DESIGNS */
+.footer{margin-top:40px;font-size:1rem;opacity:0.8;}
+.music{display:none;} /* Hidden audio player */
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  .card { padding: 20px; margin-top: 15px; }
+  .message { font-size: 1rem; line-height: 1.6; }
+  .highlight { font-size: 1.8rem; }
+  button { padding: 12px 30px; font-size: 1rem; margin: 8px; }
+  .footer { font-size: 0.9rem; margin-top: 30px; }
+  .heart { font-size: 18px; }
+  .star { width: 2px; height: 2px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="hearts" id="hearts"></div>
+<div class="fireworks" id="fireworks"></div>
+
+<div class="container">
+<h1>I'm Pradeep 💜</h1>
+
+<div class="card">
+<p class="message"><b>
+Across the Universe 🌌<br>
+My Heart found only You 💓<br><br>
+Will you be my</b><br>
+<span class="highlight"><b>Valentine?</b></span>
+</p>
+
+<div class="buttons">
+<button id="yesBtn">YES 😍</button>
+<button id="noBtn">NO 🙈</button>
+</div>
+</div>
+
+<!-- Background music (replace with your own audio file) -->
+<audio class="music" autoplay loop>
+  <source src="romantic-music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+</div>
+
+<script>
+/* ENHANCED REALISTIC STARS */
+const stars=document.getElementById("stars");
+const starTypes=['','bright','dim','blue','yellow'];
+
+for(let i=0;i<200;i++){
+  let s=document.createElement("div");
+  s.className="star " + starTypes[Math.floor(Math.random()*starTypes.length)];
+  
+  // Varied star sizes for depth
+  let size=Math.random()*3+1;
+  s.style.width=size+"px";
+  s.style.height=size+"px";
+  
+  // Random positioning
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  
+  // Varied animation timing for realistic twinkling
+  s.style.animationDuration=(Math.random()*4+2)+"s";
+  s.style.animationDelay=(Math.random()*5)+"s";
+  
+  stars.appendChild(s);
+}
+
+/* SHOOTING STARS */
+function createShootingStar(){
+  let shootingStar=document.createElement("div");
+  shootingStar.className="shooting-star";
+  shootingStar.style.left=Math.random()*50+"%";
+  shootingStar.style.top=Math.random()*50+"%";
+  stars.appendChild(shootingStar);
+  setTimeout(()=>shootingStar.remove(),3000);
+}
+
+// Create shooting stars occasionally
+setInterval(createShootingStar, 8000);
+
+/* HEARTS */
+const hearts=document.getElementById("hearts");
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💜";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDuration=(Math.random()*5+5)+"s";
+  hearts.appendChild(h);
+  setTimeout(()=>h.remove(),10000);
+},300);
+
+/* FIREWORKS */
+const fireworks=document.getElementById("fireworks");
+const fireworkColors=['#ff2e63','#ffeb3b','#00bcd4','#ff9800','#e91e63'];
+
+setInterval(()=>{
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"%";
+  f.style.top=Math.random()*100+"%";
+  f.style.background=fireworkColors[Math.floor(Math.random()*fireworkColors.length)];
+  f.style.boxShadow=`0 0 20px ${f.style.background}`;
+  fireworks.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+},2000);
+
+/* BUTTONS */
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+
+yesBtn.onclick=()=>{
+  window.location.href = "yes.html";
+};
+
+noBtn.onclick=()=>{
+  window.location.href = "no.html";
+};
+
+</script>
+
+</body>
+</html>

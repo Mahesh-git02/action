@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>She Said YES 💕</title>
+<style>
+body{
+  height:100vh;
+  background:radial-gradient(circle at bottom,#3b0a57,#120018,#000);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+}
+
+/* ENHANCED REALISTIC STARS */
+.stars{position:fixed;width:100%;height:100%;top:0;left:0;z-index:0;}
+.star{
+  position:absolute;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px rgba(255,255,255,0.8);
+  animation:realisticTwinkle ease-in-out infinite;
+}
+
+/* Different star variations for realism */
+.star.bright{
+  background:rgba(255,255,255,1);
+  box-shadow:0 0 20px rgba(255,255,255,1), 0 0 40px rgba(255,255,255,0.5);
+}
+
+.star.dim{
+  background:rgba(255,255,255,0.4);
+  box-shadow:0 0 5px rgba(255,255,255,0.3);
+}
+
+.star.blue{
+  background:rgba(173,216,230,0.9);
+  box-shadow:0 0 15px rgba(173,216,230,0.6);
+}
+
+.star.yellow{
+  background:rgba(255,255,200,0.9);
+  box-shadow:0 0 15px rgba(255,255,200,0.6);
+}
+
+@keyframes realisticTwinkle{
+  0%{opacity:0.3;transform:scale(0.8);}
+  25%{opacity:0.8;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.2);}
+  75%{opacity:0.6;transform:scale(1);}
+  100%{opacity:0.3;transform:scale(0.8);}
+}
+
+/* Shooting stars */
+.shooting-star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px 2px white;
+  animation:shoot 3s linear;
+}
+
+@keyframes shoot{
+  0%{
+    transform:translateX(0) translateY(0);
+    opacity:1;
+  }
+  100%{
+    transform:translateX(300px) translateY(300px);
+    opacity:0;
+  }
+}
+
+.shooting-star::after{
+  content:'';
+  position:absolute;
+  width:100px;
+  height:2px;
+  background:linear-gradient(90deg, white, transparent);
+  top:1px;
+  left:-100px;
+}
+
+.hearts{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:1;}
+.heart{position:absolute;font-size:22px;opacity:0.7;animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}}
+
+.fireworks{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:1;}
+.firework{position:absolute;width:5px;height:5px;background:yellow;border-radius:50%;animation:explode 1s ease-out forwards;}
+@keyframes explode{0%{transform:scale(1);opacity:1;}100%{transform:scale(10);opacity:0;}}
+
+/* GIFT BOX */
+.gift-container{
+  position:relative;
+  z-index:10;
+  cursor:pointer;
+}
+
+.gift-box{
+  width:200px;
+  height:180px;
+  position:relative;
+  transition:transform 0.3s ease;
+}
+
+.gift-box:hover{
+  transform:scale(1.05);
+}
+
+.gift-box.open{
+  pointer-events:none;
+}
+
+/* Box body */
+.box-body{
+  width:200px;
+  height:120px;
+  background:linear-gradient(135deg, #FFD700 0%, #FFC700 50%, #FFB700 100%);
+  border:3px solid #000;
+  border-radius:8px;
+  position:absolute;
+  bottom:0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  transition:all 0.8s ease;
+}
+
+.gift-box.open .box-body{
+  transform:scale(0.8);
+  opacity:0;
+}
+
+/* Box lid */
+.box-lid{
+  width:210px;
+  height:50px;
+  background:linear-gradient(135deg, #FFD700 0%, #FFC700 50%, #FFB700 100%);
+  border:3px solid #000;
+  border-radius:10px;
+  position:absolute;
+  top:5px;
+  left:-5px;
+  transform-origin:bottom center;
+  transition:all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index:2;
+}
+
+.gift-box.open .box-lid{
+  transform:rotateX(110deg) translateY(-80px);
+  opacity:0;
+}
+
+/* Vertical ribbon */
+.ribbon-vertical{
+  width:30px;
+  height:180px;
+  background:linear-gradient(90deg, #E63946 0%, #F05B66 50%, #E63946 100%);
+  border:2px solid #000;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:0;
+  z-index:1;
+  transition:all 0.8s ease;
+}
+
+.gift-box.open .ribbon-vertical{
+  opacity:0;
+  transform:translateX(-50%) scale(0.5);
+}
+
+/* Horizontal ribbon on lid */
+.ribbon-horizontal{
+  width:210px;
+  height:25px;
+  background:linear-gradient(180deg, #E63946 0%, #F05B66 50%, #E63946 100%);
+  border:2px solid #000;
+  position:absolute;
+  top:30px;
+  left:-5px;
+  z-index:3;
+  transition:all 0.8s ease;
+}
+
+.gift-box.open .ribbon-horizontal{
+  opacity:0;
+}
+
+/* Big bow */
+.bow{
+  position:absolute;
+  top:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:4;
+  transition:all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.gift-box.open .bow{
+  transform:translateX(-50%) translateY(-100px) rotate(180deg);
+  opacity:0;
+}
+
+.bow-center{
+  width:35px;
+  height:35px;
+  background:radial-gradient(circle, #E63946, #C51F2C);
+  border:3px solid #000;
+  border-radius:50%;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  z-index:2;
+}
+
+.bow-loop{
+  width:50px;
+  height:60px;
+  background:linear-gradient(135deg, #FF5A66 0%, #E63946 50%, #C51F2C 100%);
+  border:3px solid #000;
+  border-radius:50% 50% 0 50%;
+  position:absolute;
+}
+
+.bow-loop:nth-child(1){left:-45px;top:10px;transform:rotate(-20deg);}
+.bow-loop:nth-child(2){left:-25px;top:-5px;transform:rotate(15deg);}
+.bow-loop:nth-child(3){right:-45px;top:10px;transform:rotate(20deg) scaleX(-1);}
+.bow-loop:nth-child(4){right:-25px;top:-5px;transform:rotate(-15deg) scaleX(-1);}
+
+/* Cute face */
+.face{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:5;
+  transition:all 0.8s ease;
+}
+
+.gift-box.open .face{
+  opacity:0;
+  transform:translateX(-50%) scale(0.5);
+}
+
+.eyes{
+  display:flex;
+  gap:25px;
+  margin-bottom:8px;
+}
+
+.eye{
+  width:20px;
+  height:24px;
+  background:#000;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  position:relative;
+}
+
+.eye::after{
+  content:'';
+  width:7px;
+  height:7px;
+  background:#fff;
+  border-radius:50%;
+  position:absolute;
+  top:5px;
+  left:4px;
+}
+
+.eyebrows{
+  position:absolute;
+  top:-8px;
+  left:0;
+  width:100%;
+}
+
+.eyebrow{
+  width:15px;
+  height:3px;
+  background:#000;
+  border-radius:2px;
+  position:absolute;
+}
+
+.eyebrow:nth-child(1){left:-5px;transform:rotate(-15deg);}
+.eyebrow:nth-child(2){right:-5px;transform:rotate(15deg);}
+
+.mouth{
+  width:30px;
+  height:15px;
+  border:3px solid #000;
+  border-top:none;
+  border-radius:0 0 30px 30px;
+  margin:0 auto;
+}
+
+.blush{
+  width:12px;
+  height:8px;
+  background:#FF9999;
+  border-radius:50%;
+  position:absolute;
+  top:15px;
+}
+
+.blush:nth-child(1){left:-20px;}
+.blush:nth-child(2){right:-20px;}
+
+/* Image Display */
+.image-display{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(0);
+  opacity:0;
+  transition:all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  z-index:100;
+  text-align:center;
+}
+
+.image-display.show{
+  transform:translate(-50%, -50%) scale(1);
+  opacity:1;
+}
+
+.image-display img{
+  max-width:90vw;
+  max-height:70vh;
+  border-radius:20px;
+  border:5px solid #FFD700;
+  box-shadow:0 0 40px rgba(255,215,0,0.6), 0 0 80px rgba(255,105,180,0.4);
+  animation:glow 2s ease-in-out infinite;
+}
+
+@keyframes glow{
+  0%, 100%{box-shadow:0 0 40px rgba(255,215,0,0.6), 0 0 80px rgba(255,105,180,0.4);}
+  50%{box-shadow:0 0 60px rgba(255,215,0,0.8), 0 0 120px rgba(255,105,180,0.6);}
+}
+
+.image-display h1{
+  color:#FFD700;
+  font-size:3em;
+  margin:20px 0 10px 0;
+  text-shadow:0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,105,180,0.6);
+  animation:textGlow 2s ease-in-out infinite;
+}
+
+@keyframes textGlow{
+  0%, 100%{text-shadow:0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,105,180,0.6);}
+  50%{text-shadow:0 0 30px rgba(255,215,0,1), 0 0 60px rgba(255,105,180,0.8);}
+}
+
+.image-display p{
+  color:#FFB7C5;
+  font-size:1.5em;
+  margin:10px 0;
+  text-shadow:0 2px 10px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) { 
+  .heart { font-size: 18px; } 
+  .star { width: 2px; height: 2px; } 
+  .gift-box { transform:scale(0.8); }
+  .image-display h1 { font-size: 2em; }
+  .image-display p { font-size: 1.2em; }
+  .image-display img { max-width: 85vw; max-height: 60vh; }
+}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="hearts" id="hearts"></div>
+<div class="fireworks" id="fireworks"></div>
+
+<!-- Audio element for background music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="https://image2url.com/r2/default/audio/1770818132070-8329dd1f-1705-4c16-b6a0-a8fbb119a820.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="gift-container" onclick="openGift()">
+  <div class="gift-box" id="giftBox">
+    <!-- Bow -->
+    <div class="bow">
+      <div class="bow-loop"></div>
+      <div class="bow-loop"></div>
+      <div class="bow-loop"></div>
+      <div class="bow-loop"></div>
+      <div class="bow-center"></div>
+    </div>
+    
+    <!-- Lid -->
+    <div class="box-lid"></div>
+    
+    <!-- Ribbons -->
+    <div class="ribbon-vertical"></div>
+    <div class="ribbon-horizontal"></div>
+    
+    <!-- Box body -->
+    <div class="box-body"></div>
+    
+    <!-- Cute face -->
+    <div class="face">
+      <div class="eyebrows">
+        <div class="eyebrow"></div>
+        <div class="eyebrow"></div>
+      </div>
+      <div class="eyes">
+        <div class="eye"></div>
+        <div class="eye"></div>
+      </div>
+      <div class="blush"></div>
+      <div class="blush"></div>
+      <div class="mouth"></div>
+    </div>
+  </div>
+</div>
+
+<div class="image-display" id="imageDisplay">
+  <h1>Happy Valentine's Day 💕</h1>
+  <img 
+    src="images/love.png"
+    alt="Special moment"
+    style="width:400px; border-radius:15px;"
+  >
+</div>
+
+
+
+  
+</div>
+
+<script>
+/* ENHANCED REALISTIC STARS */
+const stars=document.getElementById("stars");
+const starTypes=['','bright','dim','blue','yellow'];
+
+for(let i=0;i<200;i++){
+  let s=document.createElement("div");
+  s.className="star " + starTypes[Math.floor(Math.random()*starTypes.length)];
+  
+  // Varied star sizes for depth
+  let size=Math.random()*3+1;
+  s.style.width=size+"px";
+  s.style.height=size+"px";
+  
+  // Random positioning
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  
+  // Varied animation timing for realistic twinkling
+  s.style.animationDuration=(Math.random()*4+2)+"s";
+  s.style.animationDelay=(Math.random()*5)+"s";
+  
+  stars.appendChild(s);
+}
+
+/* SHOOTING STARS */
+function createShootingStar(){
+  let shootingStar=document.createElement("div");
+  shootingStar.className="shooting-star";
+  shootingStar.style.left=Math.random()*50+"%";
+  shootingStar.style.top=Math.random()*50+"%";
+  stars.appendChild(shootingStar);
+  setTimeout(()=>shootingStar.remove(),3000);
+}
+
+// Create shooting stars occasionally
+setInterval(createShootingStar, 8000);
+
+// Hearts
+const hearts=document.getElementById("hearts");
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💜";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDuration=(Math.random()*5+5)+"s";
+  hearts.appendChild(h);
+  setTimeout(()=>h.remove(),10000);
+},300);
+
+// Fireworks
+const fireworks=document.getElementById("fireworks");
+const fireworkColors=['#ff2e63','#ffeb3b','#00bcd4','#ff9800','#e91e63'];
+
+function createFirework(){
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"%";
+  f.style.top=Math.random()*100+"%";
+  f.style.background=fireworkColors[Math.floor(Math.random()*fireworkColors.length)];
+  f.style.boxShadow=`0 0 20px ${f.style.background}`;
+  fireworks.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+}
+
+// Initial fireworks burst
+for(let i=0;i<15;i++){
+  setTimeout(createFirework, i*100);
+}
+
+// Continuous fireworks
+setInterval(createFirework, 2000);
+
+// Open gift function with music
+let isOpen = false;
+function openGift(){
+  if(!isOpen){
+    document.getElementById("giftBox").classList.add("open");
+    document.getElementById("imageDisplay").classList.add("show");
+    isOpen = true;
+    
+    // Play background music
+    const music = document.getElementById("bgMusic");
+    music.play().catch(error => {
+      console.log("Auto-play was prevented. User interaction required.");
+    });
+    
+    // Extra fireworks on open
+    for(let i=0;i<30;i++){
+      setTimeout(createFirework, i*50);
+    }
+    
+    // More hearts
+    for(let i=0;i<20;i++){
+      setTimeout(()=>{
+        let h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💕";
+        h.style.left=Math.random()*100+"%";
+        h.style.animationDuration=(Math.random()*3+3)+"s";
+        hearts.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+      }, i*100);
+    }
+  }
+}
+</script>
+</body>
+</html>
